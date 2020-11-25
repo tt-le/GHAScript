@@ -45,10 +45,10 @@ case $file in
         exit 1
     else echo "All lines are at most 88 characters long"; fi
     ;;
-pom.xml)
+*pom.xml)
     echo "this is a pom $file"
     ;;
-build.graddle)
+*build.graddle)
     echo "this is a graddle $file"
     ;;
 *.html)
