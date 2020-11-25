@@ -27,17 +27,16 @@ flag=0
 date=$(date +"%Y")
 case $file in
 *.java)
-    # copyright="[*] *Copyright *[(][c][)](.*)*$date"
-    # while read -s line; do
-    #     # checkLength $line
-    #     if [[ $flag -eq 0 && $line =~ ${copyright} ]]; then
-    #         flag=1
-    #     fi
-    # done <"$file"
-    # if [ $flag -eq 0 ]; then
-    #     echo "Add copyright and update year"
-    #     # exit 1
-    # fi
+    copyright="[*] *Copyright *[(][c][)](.*)*$date"
+    while read -s line; do
+        if [[ $flag -eq 0 && $line =~ ${copyright} ]]; then
+            flag=1
+        fi
+    done <"$file"
+    if [ $flag -eq 0 ]; then
+        echo "Add copyright and update year"
+        exit 1
+    fi
     # awk -v re=$copyright '{if (length($0) > 88) {print NR, $0}; if ($0 ~ re) {print NR, $0}}'
     $(awk '{if (length($0) > 88) {print NR, $0 > "log.out"}}' $file)
     if [[ -s log.out ]]; then
