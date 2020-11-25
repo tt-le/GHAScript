@@ -35,7 +35,7 @@ case $file in
     done <"$file"
     if [ $flag -eq 0 ]; then
         echo "Add copyright and update year"
-        exit 1
+        # exit 1
     fi
     # awk -v re=$copyright '{if (length($0) > 88) {print NR, $0}; if ($0 ~ re) {print NR, $0}}'
     $(awk '{if (length($0) > 88) {print NR, $0 > "log.out"}}' $file)
